@@ -1,0 +1,19 @@
+<div class="container">
+  <h2>Edit Dinosaur</h2>
+
+  <form (ngSubmit)="editDino()">
+    <label for="name">Id:</label>
+    <input type="text" id="id" required [(ngModel)]="saved_id" />
+
+    <label for="name">Name:</label>
+    <input type="text" id="name" required [(ngModel)]="newDino.name" />
+
+    <label for="type">Type:</label>
+    <input type="text" id="type" required [(ngModel)]="newDino.type" />
+
+    <label for="age">Age:</label>
+    <input type="number" id="age" required [(ngModel)]="newDino.age" />
+
+    <button type="submit">Edit</button>
+  </form>
+</div>
