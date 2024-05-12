@@ -1,0 +1,16 @@
+<div class="container">
+  <h2>Create New Dinosaur</h2>
+
+  <form (ngSubmit)="createDino()">
+    <label for="name">Name:</label>
+    <input type="text" id="name" required [(ngModel)]="newDino.name" />
+
+    <label for="type">Type:</label>
+    <input type="text" id="type" required [(ngModel)]="newDino.type" />
+
+    <label for="age">Age:</label>
+    <input type="number" id="age" required [(ngModel)]="newDino.age" />
+
+    <button type="submit">Create</button>
+  </form>
+</div>

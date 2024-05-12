@@ -1,0 +1,22 @@
+<div class="container">
+  <h2>Dinosaurs Table</h2>
+
+  <table>
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Age</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let dino of data">
+      <td>{{ dino._id }}</td>
+      <td>{{ dino.name }}</td>
+      <td>{{ dino.type }}</td>
+      <td>{{ dino.age }}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
