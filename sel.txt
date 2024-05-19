@@ -1,0 +1,23 @@
+db.Dinosaurs.find({}); - повертає всіх з колекції Dinosaurs
+db.Dinosaurs.find({type: "Carnivore"}); - повертає всіх хижих динозаврів
+db.Dinosaurs.find({age: {$gt: 10}}); - повертає динозаврів старших за 10 років
+db.Dinosaurs.updateOne({name: "Velociraptor"}, {$set: {age: 9}}); - оновлює вік Велоцираптора до 9
+db.Dinosaurs.deleteOne({name: "Osha"}); - видаляє динозавра з іменем "Osha"
+db.Dinosaurs.insertOne({name: "Triceratops", type: "Herbivore", age: 25}); - додає нового динозавра
+db.Dinosaurs.replaceOne({name: "Yra"}, {name: "Yra", type: "Herbivore", age: 21}); - змінює динозавра Yra 
+db.Dinosaurs.find({}, {name: 1, _id: 0}); - повертає лише імена динозаврів
+db.Dinosaurs.countDocuments({type: "Carnivore"}); - рахує кількість хижаків
+db.Dinosaurs.find({age: {$in: [6, 8, 15]}}); - знаходить динозаврів віком 6, 8 або 15 років
+db.Dinosaurs.createIndex({name: 1}, {unique: true}); - створює унікальний індекс для поля name
+
+Агрегації:
+
+db.Dinosaurs.aggregate([{$group: {_id: "$type", count: {$sum: 1}}}]); - групує динозаврів за типом і рахує їх кількість
+db.Dinosaurs.aggregate([{$match: {age: {$lt: 10}}}, {$group: {_id: null, avgAge: {$avg: "$age"}}}]); - обчислює середній вік для динозаврів молодших 10 років
+db.Dinosaurs.aggregate([{$sort: {age: -1}}, {$limit: 2}]); - повертає двох найстарших динозаврів
+db.Dinosaurs.aggregate([{$project: {name: 1, isAdult: {$cond: [{$gte: ["$age", 18]}, true, false]}}}]); - додає поле isAdult, що вказує чи динозавр дорослий (18+)
+db.Dinosaurs.aggregate([{$addFields: {ageDoubled: {$multiply: ["$age", 2]}}}, {$match: {ageDoubled: {$gt: 20}}}]); - подвоює вік і повертає тих, чий подвоєний вік більше 20
+db.Dinosaurs.aggregate([{$addFields: {isEndangered: {$cond: {if: {$lte: ["$age", 10]}, then: true, else: false}}}}, {$match: {isEndangered: true}}]); - знаходить динозаврів, де вік <= 10
+db.Dinosaurs.aggregate([{$bucketAuto: {groupBy: "$age", buckets: 3}}]); - групує динозаврів за віком у 3 вікові групи
+db.Dinosaurs.aggregate([{$sortByCount: "$type"}]); - групує та сортує динозаврів за типом за кількістю
+db.Dinosaurs.aggregate([{$sample: {size: 2}}]); - повертає 2 випадкових динозавра
